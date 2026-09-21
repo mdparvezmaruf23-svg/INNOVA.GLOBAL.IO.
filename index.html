@@ -1,725 +1,593 @@
-```html
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>INNOVA.GLOBAL</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --black:#030303;
+  --black:#050505;
   --card:#0d0d0d;
-  --gold:#e6c76a;
-  --gold2:#a9832d;
-  --text:#f7f7f7;
-  --muted:#858585;
-  --line:rgba(230,199,106,.22);
-  --green:#37df91;
-}
-
-html{
-  scroll-behavior:smooth;
+  --card2:#121212;
+  --gold:#d6ad55;
+  --gold2:#f3d98b;
+  --white:#fff;
+  --gray:#aaa;
+  --green:#38dc7a;
+  --red:#ff6868;
 }
 
 body{
-  min-height:100vh;
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
   background:
-    radial-gradient(circle at 50% -10%,rgba(230,199,106,.14),transparent 35%),
-    radial-gradient(circle at 0% 50%,rgba(150,100,10,.06),transparent 30%),
-    #030303;
-  overflow-x:hidden;
+  radial-gradient(circle at top,rgba(214,173,85,.12),transparent 35%),
+  var(--black);
+  color:var(--white);
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
 }
 
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.35;
-  background-image:
-    linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);
-  background-size:42px 42px;
-}
-
-.hidden{
-  display:none!important;
+.app{
+  width:100%;
+  max-width:540px;
+  margin:auto;
+  padding:16px;
 }
 
 .page{
-  min-height:100vh;
-  padding:24px 15px 45px;
-  animation:pageIn .35s ease;
+  display:none;
+  animation:show .25s ease;
 }
 
-.container{
-  width:100%;
-  max-width:520px;
-  margin:auto;
+.page.active{display:block}
+
+@keyframes show{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
-@keyframes pageIn{
-  from{
-    opacity:0;
-    transform:translateY(10px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-/* =========================
-   LOGO
-========================= */
+/* LOGO */
 
 .logo-area{
   text-align:center;
-  padding-top:3px;
+  padding:20px 0 8px;
 }
 
-.logo-circle{
-  width:116px;
-  height:116px;
+.logo{
+  width:105px;
+  height:105px;
+  border:2px solid var(--gold);
+  border-radius:50%;
   margin:auto;
-  padding:3px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#fff0a3,#a9822e,#fff0a3);
-  box-shadow:
-    0 0 0 1px rgba(230,199,106,.15),
-    0 0 35px rgba(230,199,106,.15);
-}
-
-.logo-circle img{
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  display:block;
-  object-fit:cover;
-  background:#050505;
-}
-
-.brand{
-  margin-top:15px;
-  font-size:27px;
-  font-weight:900;
-  letter-spacing:2px;
-  color:var(--gold);
-}
-
-.brand span{
-  color:#fff;
-}
-
-.gold-line{
-  width:60px;
-  height:2px;
-  margin:11px auto 0;
-  border-radius:20px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-}
-
-/* =========================
-   WELCOME
-========================= */
-
-.arabic{
-  margin-top:29px;
-  text-align:center;
-  direction:rtl;
-  font-size:22px;
-  color:#e8d38b;
-}
-
-.bismillah{
-  margin-top:8px;
-  text-align:center;
-  font-size:11px;
-  color:#777;
-}
-
-.hero{
-  text-align:center;
-  padding:40px 5px 15px;
-}
-
-.hero h1{
-  font-size:29px;
-  line-height:1.2;
-  font-weight:900;
-}
-
-.hero h1 span{
-  color:var(--gold);
-}
-
-.hero p{
-  margin-top:15px;
-  color:#858585;
-  font-size:13px;
-  line-height:1.8;
-}
-
-.buttons{
-  display:flex;
-  gap:11px;
-  justify-content:center;
-  margin-top:26px;
-}
-
-.btn{
-  border:none;
-  outline:none;
-  cursor:pointer;
-  min-width:135px;
-  padding:14px 20px;
-  border-radius:12px;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:.7px;
-  transition:.2s ease;
-}
-
-.btn-gold{
-  color:#080808;
-  background:linear-gradient(135deg,#f5dc81,#b88e31);
-  border:1px solid #e3c568;
-  box-shadow:0 9px 25px rgba(230,199,106,.10);
-}
-
-.btn-dark{
-  color:var(--gold);
-  background:#0b0b0b;
-  border:1px solid var(--line);
-}
-
-.btn-red{
-  color:#ff7777;
-  background:#1a0707;
-  border:1px solid #4d1717;
-}
-
-.btn:hover{
-  transform:translateY(-2px);
-}
-
-.full{
-  width:100%;
-  margin-top:12px;
-}
-
-.info-card{
-  margin-top:24px;
-  padding:19px;
-  border-radius:18px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.025);
-  text-align:center;
-  backdrop-filter:blur(12px);
-}
-
-.info-title{
-  color:var(--gold);
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:1px;
-}
-
-.info-card p{
-  color:#777;
-  font-size:11px;
-  line-height:1.8;
-  margin-top:8px;
-}
-
-/* =========================
-   HOW IT WORKS
-========================= */
-
-.steps{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:7px;
-  margin-top:15px;
-}
-
-.step{
-  min-height:86px;
-  padding:10px 4px;
-  border-radius:13px;
-  border:1px solid #202020;
-  background:#090909;
-  text-align:center;
-}
-
-.step-icon{
-  font-size:18px;
-}
-
-.step strong{
-  display:block;
-  color:#ddd;
-  font-size:9px;
-  margin-top:8px;
-  line-height:1.4;
-}
-
-/* =========================
-   SOCIAL
-========================= */
-
-.social-box{
-  margin-top:17px;
-  padding:18px;
-  border-radius:18px;
-  border:1px solid var(--line);
-  background:linear-gradient(145deg,#101010,#070707);
-}
-
-.social-title{
-  text-align:center;
-  color:var(--gold);
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:1.5px;
-}
-
-.social-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:14px;
-}
-
-.social-btn{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:7px;
-  min-height:47px;
-  border-radius:11px;
-  text-decoration:none;
+  color:var(--gold2);
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:2px;
+  box-shadow:0 0 35px rgba(214,173,85,.18);
+}
+
+.brand{
+  color:var(--gold2);
+  font-size:27px;
+  font-weight:900;
+  margin-top:14px;
+  letter-spacing:1px;
+}
+
+.tagline{
+  color:#777;
+  font-size:10px;
+  letter-spacing:2px;
+  margin-top:5px;
+}
+
+.bismillah{
+  text-align:center;
+  color:var(--gold2);
+  font-size:20px;
+  margin-top:17px;
+}
+
+.bismillah-en{
+  text-align:center;
+  color:#777;
   font-size:11px;
-  font-weight:800;
+  margin-top:5px;
 }
 
-.telegram{
-  color:#72c8ff;
-  background:#07141d;
-  border:1px solid #173b50;
+/* HERO */
+
+.hero{
+  text-align:center;
+  padding:18px 4px;
 }
 
-.youtube{
-  color:#ff7d7d;
-  background:#1b0707;
-  border:1px solid #4a1717;
+.hero h1{
+  font-size:25px;
+  margin-bottom:10px;
 }
 
-/* =========================
-   CARDS / FORMS
-========================= */
+.hero p{
+  color:var(--gray);
+  font-size:13px;
+  line-height:1.7;
+}
+
+/* CARDS */
 
 .card{
-  position:relative;
-  margin-top:22px;
-  padding:24px 20px;
+  background:linear-gradient(145deg,#121212,#080808);
+  border:1px solid rgba(214,173,85,.35);
   border-radius:22px;
-  background:linear-gradient(145deg,rgba(20,20,20,.94),rgba(7,7,7,.96));
-  border:1px solid var(--line);
-  box-shadow:
-    0 25px 65px rgba(0,0,0,.38),
-    inset 0 1px 0 rgba(255,255,255,.025);
-  backdrop-filter:blur(15px);
+  padding:21px;
+  margin-top:16px;
+  box-shadow:0 18px 50px rgba(0,0,0,.4);
 }
 
-.title{
-  text-align:center;
-  font-size:21px;
-  font-weight:900;
-  margin-bottom:22px;
+.card-title{
+  color:var(--gold2);
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:15px;
 }
 
-.title span{
-  color:var(--gold);
+/* STEPS */
+
+.steps{
+  display:grid;
+  gap:10px;
+}
+
+.step{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:13px;
+  background:#0a0a0a;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:14px;
+}
+
+.step-number{
+  width:34px;
+  height:34px;
+  min-width:34px;
+  border:1px solid var(--gold);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gold2);
+  font-weight:bold;
+}
+
+.step-text{
+  color:#ddd;
+  font-size:13px;
+}
+
+/* BUTTONS */
+
+.btn{
+  width:100%;
+  padding:14px;
+  margin-top:11px;
+  border-radius:13px;
+  font-weight:bold;
+  border:none;
+  cursor:pointer;
+}
+
+.gold-btn{
+  background:linear-gradient(135deg,#b98a32,#f3d98b);
+  color:#050505;
+}
+
+.outline-btn{
+  background:transparent;
+  border:1px solid var(--gold);
+  color:var(--gold2);
+}
+
+.red-btn{
+  background:#241010;
+  border:1px solid rgba(255,104,104,.3);
+  color:#ff8585;
+}
+
+/* FORM */
+
+.group{
+  margin-bottom:14px;
 }
 
 label{
   display:block;
-  margin:14px 0 7px;
-  color:#aaa;
-  font-size:11px;
-  font-weight:700;
+  color:#ccc;
+  font-size:12px;
+  margin-bottom:6px;
 }
 
-input,
-select{
+input,select{
   width:100%;
   padding:14px;
-  color:#fff;
-  background:#090909;
-  border:1px solid #292929;
-  border-radius:11px;
+  border-radius:12px;
+  background:#070707;
+  border:1px solid rgba(214,173,85,.28);
+  color:white;
   outline:none;
+}
+
+input:focus,select:focus{
+  border-color:var(--gold);
+}
+
+.error{
+  color:var(--red);
+  font-size:12px;
+  margin-top:8px;
+}
+
+/* BACK */
+
+.back{
+  display:inline-block;
+  color:var(--gold2);
   font-size:13px;
+  margin:7px 0 5px;
+  cursor:pointer;
 }
 
-input:focus,
-select:focus{
-  border-color:rgba(230,199,106,.65);
-  box-shadow:0 0 0 3px rgba(230,199,106,.06);
+/* PAYMENT */
+
+.notice{
+  background:#151207;
+  border-left:3px solid var(--gold);
+  border-radius:8px;
+  padding:12px;
+  color:#bbb;
+  font-size:12px;
+  line-height:1.6;
 }
 
-input::placeholder{
-  color:#505050;
-}
-
-input[type=file]{
-  padding:11px;
-  color:#777;
-}
-
-input[readonly]{
-  color:var(--gold);
-}
-
-/* =========================
-   PAYMENT
-========================= */
-
-.amount{
-  padding:20px;
+.payment-number{
   text-align:center;
-  border-radius:17px;
-  border:1px solid rgba(230,199,106,.28);
-  background:radial-gradient(circle at 50% 0%,rgba(230,199,106,.10),transparent 65%),#080808;
+  font-size:27px;
+  font-weight:bold;
+  color:var(--gold2);
+  border:1px dashed var(--gold);
+  border-radius:14px;
+  padding:16px;
+  margin:15px 0;
 }
 
-.amount small{
-  color:#777;
-  font-size:10px;
-  letter-spacing:1px;
+.methods{
+  display:flex;
+  gap:10px;
 }
 
-.amount strong{
-  display:block;
-  margin-top:5px;
-  color:var(--gold);
-  font-size:40px;
+.method{
+  flex:1;
+  text-align:center;
+  border:1px solid rgba(214,173,85,.25);
+  border-radius:12px;
+  padding:12px;
+  color:#ddd;
 }
 
-/* =========================
-   SUCCESS
-========================= */
+/* SUCCESS */
 
 .success{
   text-align:center;
-  padding:10px 0 4px;
+  padding:30px 20px;
 }
 
 .success-icon{
-  width:72px;
-  height:72px;
+  width:75px;
+  height:75px;
   margin:auto;
+  border:2px solid var(--green);
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#06150d;
-  background:var(--green);
-  font-size:36px;
-  font-weight:900;
-  box-shadow:0 0 30px rgba(55,223,145,.18);
+  color:var(--green);
+  font-size:38px;
 }
 
 .success h2{
-  margin-top:16px;
-  font-size:22px;
-}
-
-.success h2 span{
-  color:var(--gold);
+  color:var(--gold2);
+  margin:17px 0 9px;
 }
 
 .success p{
-  margin-top:8px;
-  color:#777;
-  font-size:12px;
-  line-height:1.7;
+  color:#999;
+  font-size:13px;
+  line-height:1.6;
 }
 
-/* =========================
-   PROFILE
-========================= */
+.id-box{
+  color:var(--gold2);
+  font-size:28px;
+  font-weight:bold;
+  border:1px solid var(--gold);
+  border-radius:14px;
+  padding:16px;
+  margin:17px 0;
+}
 
-.profile-card{
-  padding:21px;
+/* PROFILE */
+
+.profile-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:7px 0 15px;
+}
+
+.profile-title{
+  font-size:23px;
+  color:var(--gold2);
+  font-weight:bold;
 }
 
 .settings{
-  position:absolute;
-  top:16px;
-  right:16px;
-  width:42px;
-  height:42px;
+  width:44px;
+  height:44px;
+  border:1px solid var(--gold);
+  background:#0c0c0c;
+  color:var(--gold2);
   border-radius:50%;
-  color:var(--gold);
-  background:#0a0a0a;
-  border:1px solid var(--line);
-  cursor:pointer;
-  font-size:19px;
-  transition:.2s;
+  font-size:20px;
 }
 
-.settings:hover{
-  transform:rotate(25deg);
-  border-color:var(--gold);
+/* BIG PROFILE */
+
+.profile-card{
+  background:
+  radial-gradient(circle at top right,rgba(214,173,85,.14),transparent 40%),
+  linear-gradient(145deg,#171717,#080808);
+  border:1px solid rgba(214,173,85,.55);
+  border-radius:25px;
+  padding:25px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
 }
 
-.profile-row{
+.profile-main{
   display:flex;
   align-items:center;
-  gap:16px;
-  padding-right:48px;
+  gap:18px;
 }
 
-.photo-wrap{
-  position:relative;
-  flex-shrink:0;
-}
-
-.profile-photo{
-  width:84px;
-  height:84px;
-  object-fit:cover;
+.avatar{
+  width:110px;
+  height:110px;
+  min-width:110px;
   border-radius:50%;
-  background:#060606;
   border:2px solid var(--gold);
-  box-shadow:0 0 25px rgba(230,199,106,.12);
+  background:#181818;
+  object-fit:cover;
 }
 
-.member-name{
-  color:#fff;
-  font-size:18px;
-  font-weight:900;
+.avatar-empty{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:43px;
+  color:var(--gold2);
+}
+
+.profile-name{
+  font-size:22px;
+  font-weight:bold;
+  margin-bottom:8px;
   word-break:break-word;
 }
 
 .member-id{
-  color:var(--gold);
-  margin-top:7px;
-  font-size:11px;
-  font-weight:800;
+  color:var(--gold2);
+  font-weight:bold;
+  font-size:14px;
+  margin-bottom:10px;
 }
 
 .active{
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  margin-top:8px;
-  padding:5px 9px;
-  border-radius:20px;
   color:var(--green);
-  background:rgba(55,223,145,.06);
-  border:1px solid rgba(55,223,145,.16);
-  font-size:9px;
-  font-weight:900;
+  font-size:12px;
+  font-weight:bold;
 }
 
-.active-dot{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 8px var(--green);
-}
-
-.show{
-  margin-top:20px;
-  padding-top:16px;
-  border-top:1px solid #202020;
-  text-align:center;
-  color:#999;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:1px;
+.show-more{
+  width:100%;
+  margin-top:21px;
+  padding:12px;
+  background:transparent;
+  border:1px solid rgba(214,173,85,.35);
+  border-radius:12px;
+  color:var(--gold2);
   cursor:pointer;
 }
 
-.details{
-  margin-top:13px;
+.more{
+  display:none;
+  margin-top:8px;
+}
+
+.more.open{
+  display:block;
 }
 
 .detail{
   display:flex;
   justify-content:space-between;
-  padding:6px 0;
-  font-size:10px;
-  color:#666;
+  padding:13px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
 
-.detail strong{
-  color:#ccc;
-  font-weight:600;
+.detail:last-child{
+  border-bottom:none;
 }
 
-/* =========================
-   NEXT PROGRAM
-========================= */
-
-.next-box{
-  margin-top:20px;
-  padding:20px 16px;
-  border-radius:19px;
-  border:1px solid var(--line);
-  background:
-    radial-gradient(circle at 50% 0%,rgba(230,199,106,.10),transparent 60%),
-    #090909;
-  text-align:center;
-}
-
-.next-label{
+.detail-label{
   color:#777;
-  font-size:9px;
+  font-size:12px;
+}
+
+.detail-value{
+  color:#eee;
+  font-size:13px;
+  text-align:right;
+}
+
+/* ABOUT */
+
+.about-title{
+  color:var(--gold2);
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:11px;
+}
+
+.about-text{
+  color:#b8b8b8;
+  font-size:14px;
+  line-height:1.8;
+}
+
+/* NEXT PROGRAM */
+
+.next{
+  background:
+  radial-gradient(circle at top right,rgba(214,173,85,.18),transparent 45%),
+  linear-gradient(145deg,#17130a,#080808);
+  border:1px solid rgba(214,173,85,.55);
+  border-radius:23px;
+  padding:25px 21px;
+  margin-top:16px;
+}
+
+.next-small{
+  color:var(--gold2);
+  font-size:11px;
+  letter-spacing:2px;
+  font-weight:bold;
+}
+
+.next-date{
+  font-size:28px;
   font-weight:900;
-  letter-spacing:1.8px;
+  margin:10px 0;
+}
+
+.next-text{
+  color:#aaa;
+  font-size:13px;
+  line-height:1.7;
 }
 
 .countdown{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:6px;
-  margin-top:14px;
+  gap:7px;
+  margin-top:19px;
 }
 
-.time-unit{
-  padding:10px 3px;
-  border-radius:10px;
-  border:1px solid #252525;
-  background:#060606;
+.time{
+  background:#080808;
+  border:1px solid rgba(214,173,85,.25);
+  border-radius:11px;
+  text-align:center;
+  padding:11px 3px;
 }
 
-.time-unit strong{
-  display:block;
-  color:var(--gold);
-  font-size:20px;
-  font-weight:900;
+.time-number{
+  color:var(--gold2);
+  font-size:19px;
+  font-weight:bold;
 }
 
-.time-unit span{
-  display:block;
+.time-label{
+  color:#666;
+  font-size:8px;
   margin-top:3px;
-  color:#555;
-  font-size:7px;
-  font-weight:700;
 }
 
-.next-title{
-  margin-top:18px;
-  color:var(--gold);
-  font-size:14px;
-  font-weight:900;
-  letter-spacing:.5px;
-}
+/* SOCIAL */
 
-.next-message{
-  margin-top:8px;
-  color:#888;
-  font-size:11px;
-  line-height:1.7;
-}
-
-.locked{
-  display:inline-block;
-  margin-top:13px;
-  padding:7px 11px;
-  border-radius:20px;
-  color:#aaa;
-  background:#111;
-  border:1px solid #282828;
-  font-size:9px;
-  font-weight:800;
-}
-
-.unlocked{
-  color:var(--green);
-  border-color:rgba(55,223,145,.25);
-  background:rgba(55,223,145,.05);
-}
-
-/* =========================
-   SETTINGS
-========================= */
-
-.setting{
-  padding:15px;
+.social-title{
+  color:var(--gold2);
+  text-align:center;
+  font-size:16px;
+  font-weight:bold;
   margin-bottom:13px;
-  border-radius:13px;
-  border:1px solid #242424;
+}
+
+.social-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+
+.social{
+  min-height:75px;
+  border:1px solid rgba(214,173,85,.35);
+  border-radius:14px;
   background:#090909;
+  color:#ddd;
+  text-decoration:none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  font-size:11px;
 }
 
-.setting-title{
-  margin-bottom:8px;
-  color:var(--gold);
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:1px;
+.social-icon{
+  color:var(--gold2);
+  font-size:25px;
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 .footer{
-  margin-top:25px;
   text-align:center;
-  color:#454545;
-  font-size:9px;
-  letter-spacing:.7px;
+  color:#555;
+  font-size:10px;
+  line-height:1.6;
+  margin:21px 0 8px;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* SETTINGS */
 
-@media(max-width:430px){
+.settings-avatar{
+  display:block;
+  margin:3px auto 20px;
+}
 
-  .brand{
+@media(max-width:380px){
+
+  .avatar{
+    width:88px;
+    height:88px;
+    min-width:88px;
+  }
+
+  .profile-name{
+    font-size:19px;
+  }
+
+  .profile-card{
+    padding:20px;
+  }
+
+  .next-date{
     font-size:24px;
-  }
-
-  .hero h1{
-    font-size:25px;
-  }
-
-  .buttons .btn{
-    min-width:125px;
-  }
-
-  .steps{
-    gap:5px;
-  }
-
-  .step{
-    min-height:82px;
-  }
-
-  .profile-photo{
-    width:76px;
-    height:76px;
-  }
-
-  .member-name{
-    font-size:16px;
   }
 }
 </style>
@@ -727,532 +595,434 @@ input[readonly]{
 
 <body>
 
-<!-- ==================================================
-     WELCOME PAGE
-================================================== -->
+<div class="app">
 
-<section id="homePage" class="page">
+<!-- ================= WELCOME ================= -->
 
-<div class="container">
+<section id="welcome" class="page active">
 
   <div class="logo-area">
 
-    <div class="logo-circle">
+    <div class="logo">IG</div>
 
-      <img
-        id="homeLogo"
-        src="https://dummyimage.com/400x400/050505/e6c76a&text=INNOVA.GLOBAL"
-        alt="INNOVA.GLOBAL">
+    <div class="brand">INNOVA.GLOBAL</div>
 
+    <div class="tagline">
+      SMART DIGITAL NETWORK PLATFORM
     </div>
 
-    <div class="brand">
-      INNOVA<span>.GLOBAL</span>
-    </div>
-
-    <div class="gold-line"></div>
-
-  </div>
-
-
-  <div class="arabic">
-    بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
   </div>
 
   <div class="bismillah">
+    بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+  </div>
+
+  <div class="bismillah-en">
     Bismillahir Rahmanir Rahim
   </div>
 
-
   <div class="hero">
 
-    <h1>
-      WELCOME TO
-      <span>INNOVA.GLOBAL</span>
-    </h1>
+    <h1>WELCOME TO INNOVA.GLOBAL</h1>
 
     <p>
-      A simple, organized and professional digital member platform.
-      Create your account and complete the INNOVA001 activation process.
+      A professional digital network platform designed
+      to connect, learn and grow through a simple
+      member journey.
     </p>
-
-
-    <div class="buttons">
-
-      <button
-        class="btn btn-gold"
-        onclick="openPage('joinPage')">
-        JOIN
-      </button>
-
-      <button
-        class="btn btn-dark"
-        onclick="openPage('loginPage')">
-        LOGIN
-      </button>
-
-    </div>
 
   </div>
 
+  <div class="card">
 
-  <div class="info-card">
-
-    <div class="info-title">
+    <div class="card-title">
       HOW IT WORKS
     </div>
 
     <div class="steps">
 
       <div class="step">
-        <div class="step-icon">📝</div>
-        <strong>CREATE<br>ACCOUNT</strong>
+        <div class="step-number">01</div>
+        <div class="step-text">
+          Create your member account
+        </div>
       </div>
 
       <div class="step">
-        <div class="step-icon">💳</div>
-        <strong>COMPLETE<br>PAYMENT</strong>
+        <div class="step-number">02</div>
+        <div class="step-text">
+          Complete the ৳200 activation payment
+        </div>
       </div>
 
       <div class="step">
-        <div class="step-icon">🔐</div>
-        <strong>ACTIVATE<br>ID</strong>
+        <div class="step-number">03</div>
+        <div class="step-text">
+          Enter your activation code
+        </div>
       </div>
 
       <div class="step">
-        <div class="step-icon">👤</div>
-        <strong>MEMBER<br>PROFILE</strong>
+        <div class="step-number">04</div>
+        <div class="step-text">
+          Access your member profile
+        </div>
       </div>
 
     </div>
 
-  </div>
+    <button class="btn gold-btn"
+      onclick="showPage('register')">
+      JOIN / CREATE ACCOUNT
+    </button>
 
-
-  <div class="info-card">
-
-    <div class="info-title">
-      NEXT PROGRAM
-    </div>
-
-    <p>
-      After the required number of active members is reached,
-      the next program will be unlocked for active members.
-    </p>
+    <button class="btn outline-btn"
+      onclick="showPage('login')">
+      LOGIN
+    </button>
 
   </div>
 
 
-  <div class="social-box">
+  <div class="card">
 
     <div class="social-title">
       CONNECT WITH US
     </div>
 
-    <div class="social-buttons">
+    <div class="social-grid">
 
-      <a
-        class="social-btn telegram"
-        href="https://t.me/+kOclYClnM0NmYzc1"
-        target="_blank">
-        ✈️ TELEGRAM
+      <a class="social"
+         href="https://t.me/+kOclYClnM0NmYzc1"
+         target="_blank">
+        <div class="social-icon">✈</div>
+        Telegram
       </a>
 
-      <a
-        class="social-btn youtube"
-        href="https://www.youtube.com/@PowerNetwork7X"
-        target="_blank">
-        ▶ YOUTUBE
+      <a class="social"
+         href="https://wa.me/8801313213083"
+         target="_blank">
+        <div class="social-icon">◉</div>
+        WhatsApp
+      </a>
+
+      <a class="social"
+         href="https://www.youtube.com/@PowerNetwork7X"
+         target="_blank">
+        <div class="social-icon">▶</div>
+        YouTube
       </a>
 
     </div>
 
-  </div>
+    <div style="
+      text-align:center;
+      color:#777;
+      font-size:11px;
+      margin-top:12px;
+    ">
+      WhatsApp: 01313213083
+    </div>
 
+  </div>
 
   <div class="footer">
-    INNOVA.GLOBAL © 2026
+    © 2026 INNOVA.GLOBAL<br>
+    CONNECT • LEARN • GROW
   </div>
-
-</div>
 
 </section>
 
 
-<!-- ==================================================
-     JOIN PAGE
-================================================== -->
+<!-- ================= REGISTER ================= -->
 
-<section id="joinPage" class="page hidden">
+<section id="register" class="page">
 
-<div class="container">
-
-  <div class="logo-area">
-
-    <div class="brand">
-      INNOVA<span>.GLOBAL</span>
-    </div>
-
-    <div class="gold-line"></div>
-
-  </div>
-
+  <span class="back"
+    onclick="showPage('welcome')">
+    ← Back
+  </span>
 
   <div class="card">
 
-    <div class="title">
-      CREATE <span>ACCOUNT</span>
+    <div class="card-title">
+      CREATE YOUR ACCOUNT
     </div>
 
+    <div class="group">
+      <label>FULL NAME</label>
+      <input id="regName"
+             type="text"
+             placeholder="Enter your full name">
+    </div>
 
-    <label>Profile Name</label>
+    <div class="group">
+      <label>MOBILE NUMBER</label>
+      <input id="regMobile"
+             type="tel"
+             placeholder="Enter your mobile number">
+    </div>
 
-    <input
-      id="nameInput"
-      type="text"
-      placeholder="Enter your name">
+    <div class="group">
+      <label>PASSWORD</label>
+      <input id="regPassword"
+             type="password"
+             placeholder="Create your password">
+    </div>
 
+    <div class="group">
+      <label>CONFIRM PASSWORD</label>
+      <input id="regConfirm"
+             type="password"
+             placeholder="Confirm your password">
+    </div>
 
-    <label>Mobile Number</label>
+    <div id="registerError"
+         class="error"></div>
 
-    <input
-      id="mobileInput"
-      type="tel"
-      placeholder="01XXXXXXXXX">
-
-
-    <label>Password</label>
-
-    <input
-      id="passwordInput"
-      type="password"
-      placeholder="Create password">
-
-
-    <label>Confirm Password</label>
-
-    <input
-      id="confirmPasswordInput"
-      type="password"
-      placeholder="Confirm password">
-
-
-    <button
-      class="btn btn-gold full"
-      onclick="createAccount()">
-      CREATE ACCOUNT
+    <button class="btn gold-btn"
+      onclick="registerAccount()">
+      CONTINUE TO PAYMENT
     </button>
 
-
-    <button
-      class="btn btn-dark full"
-      onclick="openPage('homePage')">
-      BACK
+    <button class="btn outline-btn"
+      onclick="showPage('login')">
+      ALREADY HAVE AN ACCOUNT?
     </button>
 
   </div>
-
-</div>
 
 </section>
 
 
-<!-- ==================================================
-     PAYMENT PAGE
-================================================== -->
+<!-- ================= PAYMENT ================= -->
 
-<section id="paymentPage" class="page hidden">
+<section id="payment" class="page">
 
-<div class="container">
-
-  <div class="logo-area">
-
-    <div class="brand">
-      INNOVA<span>.GLOBAL</span>
-    </div>
-
-    <div class="gold-line"></div>
-
-  </div>
-
+  <span class="back"
+    onclick="showPage('register')">
+    ← Back
+  </span>
 
   <div class="card">
 
-    <div class="title">
-      ACTIVATE <span>INNOVA001</span>
+    <div class="card-title">
+      ACTIVATION PAYMENT
     </div>
 
-
-    <div class="amount">
-
-      <small>ACTIVATION FEE</small>
-
-      <strong>৳200</strong>
-
+    <div class="notice">
+      Complete the activation payment of
+      <b>৳200</b> using bKash or Nagad.
     </div>
 
+    <div class="payment-number">
+      01313213083
+    </div>
 
-    <label>Payment Method</label>
+    <div class="methods">
+      <div class="method">bKash</div>
+      <div class="method">Nagad</div>
+    </div>
 
-    <select id="paymentMethod">
+    <br>
 
-      <option value="">
-        Select Payment Method
-      </option>
+    <div class="group">
+      <label>PAYMENT METHOD</label>
 
-      <option value="bKash">
-        bKash
-      </option>
+      <select id="paymentMethod">
+        <option value="bKash">bKash</option>
+        <option value="Nagad">Nagad</option>
+      </select>
+    </div>
 
-      <option value="Nagad">
-        Nagad
-      </option>
+    <div class="group">
+      <label>TRANSACTION ID</label>
 
-    </select>
+      <input id="transactionId"
+             type="text"
+             placeholder="Enter transaction ID">
+    </div>
 
+    <div id="paymentError"
+         class="error"></div>
 
-    <label>Payment Number</label>
-
-    <input
-      value="01313213083"
-      readonly>
-
-
-    <button
-      class="btn btn-dark full"
-      onclick="copyNumber()">
-      COPY PAYMENT NUMBER
-    </button>
-
-
-    <label>Transaction ID</label>
-
-    <input
-      id="trxInput"
-      type="text"
-      placeholder="Enter transaction ID">
-
-
-    <label>Payment Screenshot</label>
-
-    <input
-      id="screenshotInput"
-      type="file"
-      accept="image/*">
-
-
-    <button
-      class="btn btn-gold full"
+    <button class="btn gold-btn"
       onclick="submitPayment()">
       SUBMIT PAYMENT
     </button>
 
   </div>
 
-</div>
-
 </section>
 
 
-<!-- ==================================================
-     ACTIVATION CODE
-================================================== -->
+<!-- ================= ACTIVATION ================= -->
 
-<section id="codePage" class="page hidden">
-
-<div class="container">
+<section id="activation" class="page">
 
   <div class="card">
 
-    <div class="title">
-      ACTIVATE <span>INNOVA001</span>
+    <div class="card-title">
+      ACCOUNT ACTIVATION
     </div>
 
-
-    <div class="info-card"
-         style="margin-top:0;">
-
-      <div class="info-title">
-        PAYMENT SUBMITTED
-      </div>
-
-      <p>
-        Enter your activation code to activate INNOVA001.
-      </p>
-
+    <div class="notice">
+      Enter your activation code to activate
+      your INNOVA.GLOBAL member account.
     </div>
 
+    <br>
 
-    <label>Activation Code</label>
+    <div class="group">
+      <label>ACTIVATION CODE</label>
 
-    <input
-      id="codeInput"
-      type="text"
-      inputmode="numeric"
-      placeholder="Enter activation code">
+      <input id="activationCode"
+             type="text"
+             inputmode="numeric"
+             placeholder="Enter activation code">
+    </div>
 
+    <div id="activationError"
+         class="error"></div>
 
-    <button
-      class="btn btn-gold full"
-      onclick="activateID()">
-      ACTIVATE ID
+    <button class="btn gold-btn"
+      onclick="activateAccount()">
+      ACTIVATE ACCOUNT
     </button>
 
   </div>
 
-</div>
-
 </section>
 
 
-<!-- ==================================================
-     ACTIVATED SUCCESS PAGE
-================================================== -->
+<!-- ================= SUCCESS ================= -->
 
-<section id="activatedPage" class="page hidden">
+<section id="success" class="page">
 
-<div class="container">
+  <div class="card success">
 
-  <div class="card">
-
-    <div class="success">
-
-      <div class="success-icon">
-        ✓
-      </div>
-
-      <h2>
-        <span>INNOVA001</span> ACTIVE
-      </h2>
-
-      <p>
-        Your member ID has been successfully activated.
-        Your Member Profile is now available.
-      </p>
-
+    <div class="success-icon">
+      ✓
     </div>
 
+    <h2>ACCOUNT ACTIVATED</h2>
 
-    <button
-      class="btn btn-gold full"
-      onclick="loadProfile();openPage('profilePage')">
-      OPEN MY PROFILE
+    <p>
+      Your INNOVA.GLOBAL member account
+      has been activated successfully.
+    </p>
+
+    <div id="successId"
+         class="id-box">
+      INNOVA001
+    </div>
+
+    <p>
+      Keep your INNOVA ID and password secure.
+    </p>
+
+    <button class="btn gold-btn"
+      onclick="openLoginAfterActivation()">
+      LOGIN TO PROFILE
     </button>
 
   </div>
 
-</div>
-
 </section>
 
 
-<!-- ==================================================
-     LOGIN PAGE
-================================================== -->
+<!-- ================= LOGIN ================= -->
 
-<section id="loginPage" class="page hidden">
+<section id="login" class="page">
 
-<div class="container">
+  <span class="back"
+    onclick="showPage('welcome')">
+    ← Back
+  </span>
 
   <div class="card">
 
-    <div class="title">
-      MEMBER <span>LOGIN</span>
+    <div class="card-title">
+      MEMBER LOGIN
     </div>
 
+    <div class="group">
+      <label>MOBILE NUMBER</label>
 
-    <label>Mobile Number</label>
+      <input id="loginMobile"
+             type="tel"
+             placeholder="Enter mobile number">
+    </div>
 
-    <input
-      id="loginMobile"
-      type="tel"
-      placeholder="01XXXXXXXXX">
+    <div class="group">
+      <label>PASSWORD</label>
 
+      <input id="loginPassword"
+             type="password"
+             placeholder="Enter password">
+    </div>
 
-    <label>Password</label>
+    <div id="loginError"
+         class="error"></div>
 
-    <input
-      id="loginPassword"
-      type="password"
-      placeholder="Enter password">
-
-
-    <button
-      class="btn btn-gold full"
-      onclick="login()">
+    <button class="btn gold-btn"
+      onclick="loginAccount()">
       LOGIN
     </button>
 
-
-    <button
-      class="btn btn-dark full"
-      onclick="openPage('homePage')">
-      BACK
+    <button class="btn outline-btn"
+      onclick="showPage('register')">
+      CREATE NEW ACCOUNT
     </button>
 
   </div>
-
-</div>
 
 </section>
 
 
-<!-- ==================================================
-     PROFILE PAGE
-================================================== -->
+<!-- ================= PROFILE ================= -->
 
-<section id="profilePage" class="page hidden">
+<section id="profile" class="page">
 
-<div class="container">
+  <div class="profile-top">
 
-  <div class="logo-area">
-
-    <div class="brand">
-      INNOVA<span>.GLOBAL</span>
+    <div class="profile-title">
+      MY PROFILE
     </div>
 
-    <div class="gold-line"></div>
+    <button class="settings"
+      onclick="openSettings()">
+      ⚙
+    </button>
 
   </div>
 
 
-  <div class="card profile-card">
+  <!-- BIG PROFILE CARD -->
 
-    <button
-      class="settings"
-      onclick="openPage('settingsPage')">
-      ⚙
-    </button>
+  <div class="profile-card">
 
+    <div class="profile-main">
 
-    <div class="profile-row">
-
-      <div class="photo-wrap">
-
-        <img
-          id="profileImage"
-          class="profile-photo"
-          src="https://dummyimage.com/400x400/050505/e6c76a&text=INNOVA.GLOBAL"
-          alt="Profile Picture">
-
+      <div id="profileAvatar"
+           class="avatar avatar-empty">
+        👤
       </div>
-
 
       <div>
 
-        <div
-          id="profileName"
-          class="member-name">
-          Member
+        <div id="profileName"
+             class="profile-name">
+          Member Name
         </div>
 
-        <div class="member-id">
+        <div id="profileId"
+             class="member-id">
           INNOVA001
         </div>
 
         <div class="active">
-          <span class="active-dot"></span>
-          ACTIVE
+          ● ACTIVE
         </div>
 
       </div>
@@ -1260,81 +1030,41 @@ input[readonly]{
     </div>
 
 
-    <div
-      class="show"
-      onclick="toggleDetails()">
+    <button class="show-more"
+      onclick="toggleMore()">
       SHOW MORE
-    </div>
+    </button>
 
 
-    <div
-      id="details"
-      class="details hidden">
+    <!-- ONLY DATE + TIME -->
 
-      <div class="detail">
-        <span>Joining Date</span>
-        <strong id="joiningDate">—</strong>
-      </div>
+    <div id="more"
+         class="more">
 
       <div class="detail">
-        <span>Joining Time</span>
-        <strong id="joiningTime">—</strong>
-      </div>
 
-    </div>
-
-
-    <!-- NEXT PROGRAM -->
-
-    <div class="next-box">
-
-      <div class="next-label">
-        NEXT PROGRAM OPENS IN
-      </div>
-
-
-      <div class="countdown">
-
-        <div class="time-unit">
-          <strong id="days">000</strong>
-          <span>DAYS</span>
+        <div class="detail-label">
+          Joining Date
         </div>
 
-        <div class="time-unit">
-          <strong id="hours">00</strong>
-          <span>HOURS</span>
-        </div>
-
-        <div class="time-unit">
-          <strong id="minutes">00</strong>
-          <span>MINUTES</span>
-        </div>
-
-        <div class="time-unit">
-          <strong id="seconds">00</strong>
-          <span>SECONDS</span>
+        <div id="joiningDate"
+             class="detail-value">
+          -
         </div>
 
       </div>
 
+      <div class="detail">
 
-      <div class="next-title">
-        🔐 NEXT PROGRAM
-      </div>
+        <div class="detail-label">
+          Joining Time
+        </div>
 
+        <div id="joiningTime"
+             class="detail-value">
+          -
+        </div>
 
-      <div
-        id="nextMessage"
-        class="next-message">
-        The Next Program will be unlocked after
-        500 members become active.
-      </div>
-
-
-      <div
-        id="nextStatus"
-        class="locked">
-        🔒 LOCKED — 500 ACTIVE MEMBERS REQUIRED
       </div>
 
     </div>
@@ -1342,745 +1072,1133 @@ input[readonly]{
   </div>
 
 
-  <button
-    class="btn btn-dark full"
-    onclick="openPage('homePage')">
-    HOME
+  <!-- ABOUT -->
+
+  <div class="card">
+
+    <div class="about-title">
+      ABOUT INNOVA.GLOBAL
+    </div>
+
+    <div class="about-text">
+
+      INNOVA.GLOBAL is a Smart Digital Network
+      Platform created to provide a professional
+      and organized digital environment for its
+      members.
+
+      <br><br>
+
+      Our vision is to build a connected community
+      where members can connect, learn, participate
+      and grow through a structured digital platform.
+
+      <br><br>
+
+      <b style="color:#f3d98b;">
+        CONNECT • LEARN • GROW
+      </b>
+
+    </div>
+
+  </div>
+
+
+  <!-- NEXT PROGRAM -->
+
+  <div class="next">
+
+    <div class="next-small">
+      🚀 NEXT PROGRAM
+    </div>
+
+    <div class="next-date">
+      10 OCTOBER 2026
+    </div>
+
+    <div class="next-text">
+
+      The Next Program and new packages will be
+      introduced on
+      <b style="color:#f3d98b;">
+        10 October 2026
+      </b>.
+
+      Stay connected with INNOVA.GLOBAL for upcoming
+      program updates and new opportunities.
+
+    </div>
+
+
+    <div class="countdown">
+
+      <div class="time">
+        <div id="days"
+             class="time-number">
+          00
+        </div>
+        <div class="time-label">
+          DAYS
+        </div>
+      </div>
+
+      <div class="time">
+        <div id="hours"
+             class="time-number">
+          00
+        </div>
+        <div class="time-label">
+          HOURS
+        </div>
+      </div>
+
+      <div class="time">
+        <div id="minutes"
+             class="time-number">
+          00
+        </div>
+        <div class="time-label">
+          MINUTES
+        </div>
+      </div>
+
+      <div class="time">
+        <div id="seconds"
+             class="time-number">
+          00
+        </div>
+        <div class="time-label">
+          SECONDS
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- SOCIAL -->
+
+  <div class="card">
+
+    <div class="social-title">
+      CONNECT WITH US
+    </div>
+
+    <div class="social-grid">
+
+      <a class="social"
+         href="https://t.me/+kOclYClnM0NmYzc1"
+         target="_blank">
+        <div class="social-icon">✈</div>
+        Telegram
+      </a>
+
+      <a class="social"
+         href="https://wa.me/8801313213083"
+         target="_blank">
+        <div class="social-icon">◉</div>
+        WhatsApp
+      </a>
+
+      <a class="social"
+         href="https://www.youtube.com/@PowerNetwork7X"
+         target="_blank">
+        <div class="social-icon">▶</div>
+        YouTube
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <button class="btn red-btn"
+    onclick="logout()">
+    LOGOUT
   </button>
 
 
   <div class="footer">
-    INNOVA.GLOBAL • MEMBER PROFILE
+    © 2026 INNOVA.GLOBAL<br>
+    CONNECT • LEARN • GROW
   </div>
-
-</div>
 
 </section>
 
 
-<!-- ==================================================
-     SETTINGS PAGE
-================================================== -->
+<!-- ================= SETTINGS ================= -->
 
-<section id="settingsPage" class="page hidden">
+<section id="settingsPage" class="page">
 
-<div class="container">
-
-  <div class="logo-area">
-
-    <div class="brand">
-      INNOVA<span>.GLOBAL</span>
-    </div>
-
-    <div class="gold-line"></div>
-
-  </div>
-
+  <span class="back"
+    onclick="showProfile()">
+    ← Back to Profile
+  </span>
 
   <div class="card">
 
-    <div class="title">
-      <span>SETTINGS</span>
+    <div class="card-title">
+      SETTINGS
     </div>
 
-
-    <div class="setting">
-
-      <div class="setting-title">
-        CHANGE PROFILE PICTURE
-      </div>
-
-      <input
-        id="pictureInput"
-        type="file"
-        accept="image/*">
-
+    <div id="settingsAvatar"
+         class="avatar avatar-empty settings-avatar">
+      👤
     </div>
 
+    <div class="group">
 
-    <div class="setting">
+      <label>ACCOUNT NAME</label>
 
-      <div class="setting-title">
-        CHANGE PROFILE NAME
-      </div>
-
-      <input
-        id="newNameInput"
-        type="text"
-        placeholder="Enter new name">
+      <input id="settingsName"
+             type="text"
+             placeholder="Enter account name">
 
     </div>
 
+    <div class="group">
 
-    <button
-      class="btn btn-gold full"
+      <label>PROFILE PICTURE</label>
+
+      <input id="photoInput"
+             type="file"
+             accept="image/*">
+
+    </div>
+
+    <div id="settingsError"
+         class="error"></div>
+
+    <button class="btn gold-btn"
       onclick="saveSettings()">
       SAVE CHANGES
     </button>
 
-
-    <button
-      class="btn btn-red full"
+    <button class="btn red-btn"
       onclick="logout()">
       LOGOUT
     </button>
 
-
-    <button
-      class="btn btn-dark full"
-      onclick="openPage('profilePage')">
-      BACK TO PROFILE
-    </button>
-
   </div>
 
-</div>
-
 </section>
+
+</div>
 
 
 <script>
 
-/* ==================================================
-   DATA
-================================================== */
+/* =====================================================
+   FRESH START STORAGE
+===================================================== */
 
-let account =
-  JSON.parse(
-    localStorage.getItem("INNOVA_ACCOUNT") || "null"
-  );
-
-
-const DEFAULT_LOGO =
-  "https://dummyimage.com/400x400/050505/e6c76a&text=INNOVA.GLOBAL";
+const MEMBERS_KEY = "INNOVA_GLOBAL_MEMBERS_V2";
+const CURRENT_KEY = "INNOVA_GLOBAL_CURRENT_V2";
+const PENDING_KEY = "INNOVA_GLOBAL_PENDING_V2";
+const LAST_ID_KEY = "INNOVA_GLOBAL_LAST_ID_V2";
 
 
 /*
-  Prototype counter.
-  Real 500-member counting requires a backend/database.
+  This is a NEW storage version.
+  Old prototype storage is not used.
 */
-let activeMemberCount = 1;
-
-const REQUIRED_MEMBERS = 500;
 
 
-/* ==================================================
-   PAGE CONTROL
-================================================== */
+/* =====================================================
+   PAGE SYSTEM
+===================================================== */
 
-function openPage(id){
+function showPage(id){
 
-  const pages = [
-    "homePage",
-    "joinPage",
-    "paymentPage",
-    "codePage",
-    "activatedPage",
-    "loginPage",
-    "profilePage",
-    "settingsPage"
-  ];
+  document.querySelectorAll(".page")
+    .forEach(page=>{
+      page.classList.remove("active");
+    });
 
-  pages.forEach(function(page){
+  const page=document.getElementById(id);
 
-    document
-      .getElementById(page)
-      .classList.add("hidden");
-
-  });
+  if(page){
+    page.classList.add("active");
+    window.scrollTo(0,0);
+  }
+}
 
 
-  document
-    .getElementById(id)
-    .classList.remove("hidden");
+/* =====================================================
+   STORAGE
+===================================================== */
 
+function getMembers(){
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+  try{
+    return JSON.parse(
+      localStorage.getItem(MEMBERS_KEY)
+    ) || [];
+  }catch(error){
+    return [];
+  }
+
+}
+
+function saveMembers(members){
+
+  localStorage.setItem(
+    MEMBERS_KEY,
+    JSON.stringify(members)
+  );
 
 }
 
 
-/* ==================================================
-   CREATE ACCOUNT
-================================================== */
+/* =====================================================
+   UNIQUE INNOVA ID
+===================================================== */
 
-function createAccount(){
+function generateMemberId(){
 
-  const name =
-    document.getElementById("nameInput").value.trim();
+  let last=Number(
+    localStorage.getItem(LAST_ID_KEY) || 0
+  );
 
-  const mobile =
-    document.getElementById("mobileInput").value.trim();
+  last++;
 
-  const password =
-    document.getElementById("passwordInput").value;
+  localStorage.setItem(
+    LAST_ID_KEY,
+    last
+  );
 
-  const confirm =
-    document.getElementById("confirmPasswordInput").value;
+  return "INNOVA" +
+    String(last).padStart(3,"0");
+}
+
+
+/* =====================================================
+   REGISTER
+===================================================== */
+
+function registerAccount(){
+
+  const name=
+    document.getElementById("regName")
+    .value.trim();
+
+  const mobile=
+    document.getElementById("regMobile")
+    .value.trim();
+
+  const password=
+    document.getElementById("regPassword")
+    .value;
+
+  const confirm=
+    document.getElementById("regConfirm")
+    .value;
+
+  const error=
+    document.getElementById("registerError");
+
+  error.textContent="";
 
 
   if(!name || !mobile || !password || !confirm){
 
-    alert("সব তথ্য পূরণ করুন।");
-    return;
+    error.textContent=
+      "Please complete all fields.";
 
+    return;
+  }
+
+
+  if(password.length < 4){
+
+    error.textContent=
+      "Password must contain at least 4 characters.";
+
+    return;
   }
 
 
   if(password !== confirm){
 
-    alert("Password এবং Confirm Password একই হতে হবে।");
-    return;
+    error.textContent=
+      "Passwords do not match.";
 
+    return;
   }
 
 
-  account = {
+  const members=getMembers();
+
+
+  if(
+    members.some(member=>
+      member.mobile===mobile
+    )
+  ){
+
+    error.textContent=
+      "This mobile number is already registered.";
+
+    return;
+  }
+
+
+  const member={
+
+    memberId:generateMemberId(),
 
     name:name,
+
     mobile:mobile,
+
     password:password,
 
-    id:"INNOVA001",
-
     active:false,
-    paymentSubmitted:false,
 
-    picture:DEFAULT_LOGO,
+    paymentMethod:"",
+
+    transactionId:"",
 
     joiningDate:"",
-    joiningTime:""
+
+    joiningTime:"",
+
+    photo:""
 
   };
 
 
+  members.push(member);
+
+  saveMembers(members);
+
+
   localStorage.setItem(
-    "INNOVA_ACCOUNT",
-    JSON.stringify(account)
+    PENDING_KEY,
+    member.memberId
   );
 
 
-  alert(
-    "Account successfully created."
-  );
+  document.getElementById(
+    "transactionId"
+  ).value="";
 
 
-  openPage("paymentPage");
+  showPage("payment");
 
 }
 
 
-/* ==================================================
-   COPY NUMBER
-================================================== */
-
-function copyNumber(){
-
-  const number = "01313213083";
-
-  if(navigator.clipboard){
-
-    navigator.clipboard.writeText(number)
-      .then(function(){
-
-        alert("Payment Number Copied.");
-
-      })
-      .catch(function(){
-
-        alert("Payment Number: " + number);
-
-      });
-
-  }else{
-
-    alert("Payment Number: " + number);
-
-  }
-
-}
-
-
-/* ==================================================
-   SUBMIT PAYMENT
-================================================== */
+/* =====================================================
+   PAYMENT
+===================================================== */
 
 function submitPayment(){
 
-  if(!account){
+  const transaction=
+    document.getElementById("transactionId")
+    .value.trim();
 
-    alert("আগে Account তৈরি করুন।");
+  const method=
+    document.getElementById("paymentMethod")
+    .value;
+
+  const error=
+    document.getElementById("paymentError");
+
+  error.textContent="";
+
+
+  if(!transaction){
+
+    error.textContent=
+      "Please enter your transaction ID.";
+
     return;
-
   }
 
 
-  const method =
-    document.getElementById("paymentMethod").value;
-
-  const trx =
-    document.getElementById("trxInput").value.trim();
-
-  const screenshot =
-    document.getElementById("screenshotInput").files[0];
+  const pendingId=
+    localStorage.getItem(PENDING_KEY);
 
 
-  if(!method){
+  if(!pendingId){
 
-    alert("Payment Method নির্বাচন করুন।");
+    error.textContent=
+      "Registration session not found.";
+
     return;
-
   }
 
 
-  if(!trx){
+  const members=getMembers();
 
-    alert("Transaction ID দিন।");
+  const index=
+    members.findIndex(
+      member=>member.memberId===pendingId
+    );
+
+
+  if(index===-1){
+
+    error.textContent=
+      "Member account not found.";
+
     return;
-
   }
 
 
-  if(!screenshot){
-
-    alert("Payment Screenshot দিন।");
-    return;
-
-  }
+  members[index].paymentMethod=method;
+  members[index].transactionId=transaction;
 
 
-  account.paymentSubmitted = true;
+  saveMembers(members);
 
 
-  localStorage.setItem(
-    "INNOVA_ACCOUNT",
-    JSON.stringify(account)
-  );
-
-
-  alert(
-    "Payment information submitted."
-  );
-
-
-  openPage("codePage");
+  showPage("activation");
 
 }
 
 
-/* ==================================================
-   ACTIVATION
-================================================== */
+/* =====================================================
+   ACTIVATION CODES
+===================================================== */
 
-function activateID(){
+const ACTIVATION_CODES=[
 
-  const code =
-    document.getElementById("codeInput").value.trim();
+  "321456",
+  "654321",
+  "147258",
+  "258147",
+  "369258",
+  "852369",
+  "741852",
+  "963147"
 
-
-  const validCodes = [
-
-    "321456",
-    "654321",
-    "147258",
-    "258147",
-    "369258",
-    "852369",
-    "741852",
-    "963147"
-
-  ];
+];
 
 
-  if(!account){
+/* =====================================================
+   ACTIVATE ACCOUNT
+===================================================== */
 
-    alert("Account পাওয়া যায়নি।");
+function activateAccount(){
+
+  const code=
+    document.getElementById("activationCode")
+    .value.trim();
+
+  const error=
+    document.getElementById("activationError");
+
+  error.textContent="";
+
+
+  if(!code){
+
+    error.textContent=
+      "Please enter activation code.";
+
     return;
-
   }
 
 
-  if(!account.paymentSubmitted){
+  if(!ACTIVATION_CODES.includes(code)){
 
-    alert("আগে Payment Submit করুন।");
+    error.textContent=
+      "Invalid activation code.";
+
     return;
-
   }
 
 
-  if(!validCodes.includes(code)){
+  const pendingId=
+    localStorage.getItem(PENDING_KEY);
 
-    alert("Activation Code সঠিক নয়।");
+
+  if(!pendingId){
+
+    error.textContent=
+      "Registration session not found.";
+
     return;
-
   }
 
 
-  account.active = true;
+  const members=getMembers();
+
+  const index=
+    members.findIndex(
+      member=>member.memberId===pendingId
+    );
 
 
-  const now = new Date();
+  if(index===-1){
+
+    error.textContent=
+      "Member account not found.";
+
+    return;
+  }
 
 
-  account.joiningDate =
-    now.toLocaleDateString();
+  const now=new Date();
 
 
-  account.joiningTime =
-    now.toLocaleTimeString();
+  members[index].active=true;
+
+
+  members[index].joiningDate=
+    now.toLocaleDateString(
+      "en-GB",
+      {
+        day:"2-digit",
+        month:"long",
+        year:"numeric"
+      }
+    );
+
+
+  members[index].joiningTime=
+    now.toLocaleTimeString(
+      "en-US",
+      {
+        hour:"2-digit",
+        minute:"2-digit",
+        second:"2-digit"
+      }
+    );
+
+
+  saveMembers(members);
 
 
   localStorage.setItem(
-    "INNOVA_ACCOUNT",
-    JSON.stringify(account)
+    CURRENT_KEY,
+    members[index].memberId
   );
 
 
-  loadProfile();
+  document.getElementById(
+    "successId"
+  ).textContent=
+    members[index].memberId;
 
 
-  openPage("activatedPage");
+  localStorage.removeItem(PENDING_KEY);
+
+
+  showPage("success");
 
 }
 
 
-/* ==================================================
+/* =====================================================
    LOGIN
-================================================== */
+===================================================== */
 
-function login(){
+function loginAccount(){
 
-  const mobile =
-    document.getElementById("loginMobile").value.trim();
+  const mobile=
+    document.getElementById("loginMobile")
+    .value.trim();
 
-  const password =
-    document.getElementById("loginPassword").value;
+  const password=
+    document.getElementById("loginPassword")
+    .value;
+
+  const error=
+    document.getElementById("loginError");
+
+  error.textContent="";
 
 
-  if(!account){
+  if(!mobile || !password){
 
-    alert(
-      "কোনো Account নেই। আগে JOIN করুন।"
-    );
+    error.textContent=
+      "Please enter mobile number and password.";
 
     return;
-
   }
 
 
-  if(
-    mobile !== account.mobile ||
-    password !== account.password
-  ){
+  const members=getMembers();
 
-    alert(
-      "Mobile Number অথবা Password ভুল।"
+
+  const member=
+    members.find(
+      item=>
+        item.mobile===mobile &&
+        item.password===password
     );
 
-    return;
 
+  if(!member){
+
+    error.textContent=
+      "Mobile number or password is incorrect.";
+
+    return;
   }
 
 
-  if(!account.active){
+  if(!member.active){
 
-    alert(
-      "INNOVA001 এখনো Active হয়নি।"
-    );
+    error.textContent=
+      "Your account is not activated yet.";
 
     return;
-
   }
 
 
-  loadProfile();
+  localStorage.setItem(
+    CURRENT_KEY,
+    member.memberId
+  );
 
-  openPage("profilePage");
+
+  loadProfile(member);
+
+  showPage("profile");
 
 }
 
 
-/* ==================================================
-   PROFILE
-================================================== */
+/* =====================================================
+   CURRENT MEMBER
+===================================================== */
 
-function loadProfile(){
+function getCurrentMember(){
 
-  if(!account) return;
+  const current=
+    localStorage.getItem(CURRENT_KEY);
 
-
-  document.getElementById("profileName")
-    .innerText =
-      account.name || "Member";
+  if(!current) return null;
 
 
-  document.getElementById("profileImage")
-    .src =
-      account.picture || DEFAULT_LOGO;
+  const members=getMembers();
 
 
-  document.getElementById("joiningDate")
-    .innerText =
-      account.joiningDate || "—";
-
-
-  document.getElementById("joiningTime")
-    .innerText =
-      account.joiningTime || "—";
-
-
-  updateNextProgram();
+  return members.find(
+    member=>member.memberId===current
+  ) || null;
 
 }
 
 
-/* ==================================================
-   SHOW MORE
-================================================== */
+/* =====================================================
+   LOAD PROFILE
+===================================================== */
 
-function toggleDetails(){
+function loadProfile(member){
 
-  document
-    .getElementById("details")
-    .classList.toggle("hidden");
+  if(!member) return;
+
+
+  document.getElementById(
+    "profileName"
+  ).textContent=member.name;
+
+
+  document.getElementById(
+    "profileId"
+  ).textContent=member.memberId;
+
+
+  document.getElementById(
+    "joiningDate"
+  ).textContent=
+    member.joiningDate || "-";
+
+
+  document.getElementById(
+    "joiningTime"
+  ).textContent=
+    member.joiningTime || "-";
+
+
+  document.getElementById(
+    "settingsName"
+  ).value=member.name;
+
+
+  setAvatar(
+    document.getElementById("profileAvatar"),
+    member.photo
+  );
+
+
+  setAvatar(
+    document.getElementById("settingsAvatar"),
+    member.photo
+  );
 
 }
 
 
-/* ==================================================
-   NEXT PROGRAM
-================================================== */
+/* =====================================================
+   AVATAR
+===================================================== */
 
-function updateNextProgram(){
+function setAvatar(element,photo){
 
-  if(activeMemberCount >= REQUIRED_MEMBERS){
+  if(!element) return;
 
-    document.getElementById("nextMessage")
-      .innerText =
-        "Congratulations! The Next Program is now available.";
 
-    const status =
-      document.getElementById("nextStatus");
+  if(photo){
 
-    status.innerText =
-      "🟢 NEXT PROGRAM UNLOCKED";
+    element.classList.remove(
+      "avatar-empty"
+    );
 
-    status.classList.add("unlocked");
+    element.innerHTML="";
+
+    element.style.backgroundImage=
+      `url("${photo}")`;
+
+    element.style.backgroundSize="cover";
+
+    element.style.backgroundPosition="center";
 
   }else{
 
-    document.getElementById("nextMessage")
-      .innerText =
-        "The Next Program will be unlocked after 500 members become active.";
+    element.classList.add(
+      "avatar-empty"
+    );
+
+    element.style.backgroundImage="none";
+
+    element.innerHTML="👤";
 
   }
 
 }
 
 
-/*
-  Prototype countdown.
-  The countdown is visual until the real
-  backend program-opening date is configured.
-*/
+/* =====================================================
+   SHOW MORE
+===================================================== */
 
-let countdownSeconds =
-  (23 * 60 * 60) +
-  (59 * 60) +
-  59;
+function toggleMore(){
+
+  const more=
+    document.getElementById("more");
+
+  const button=
+    document.querySelector(".show-more");
 
 
-function updateCountdown(){
+  more.classList.toggle("open");
 
-  if(activeMemberCount >= REQUIRED_MEMBERS){
 
-    document.getElementById("days").innerText = "000";
-    document.getElementById("hours").innerText = "00";
-    document.getElementById("minutes").innerText = "00";
-    document.getElementById("seconds").innerText = "00";
+  if(more.classList.contains("open")){
+
+    button.textContent="SHOW LESS";
+
+  }else{
+
+    button.textContent="SHOW MORE";
+
+  }
+
+}
+
+
+/* =====================================================
+   SETTINGS
+===================================================== */
+
+function openSettings(){
+
+  const member=getCurrentMember();
+
+  if(!member){
+
+    showPage("welcome");
 
     return;
-
   }
 
 
-  let total =
-    countdownSeconds;
+  loadProfile(member);
+
+  document.getElementById(
+    "photoInput"
+  ).value="";
 
 
-  const days =
-    Math.floor(total / 86400);
-
-  total %= 86400;
-
-
-  const hours =
-    Math.floor(total / 3600);
-
-  total %= 3600;
-
-
-  const minutes =
-    Math.floor(total / 60);
-
-  const seconds =
-    total % 60;
-
-
-  document.getElementById("days")
-    .innerText =
-      String(days).padStart(3,"0");
-
-
-  document.getElementById("hours")
-    .innerText =
-      String(hours).padStart(2,"0");
-
-
-  document.getElementById("minutes")
-    .innerText =
-      String(minutes).padStart(2,"0");
-
-
-  document.getElementById("seconds")
-    .innerText =
-      String(seconds).padStart(2,"0");
-
-
-  if(countdownSeconds > 0){
-
-    countdownSeconds--;
-
-  }
+  showPage("settingsPage");
 
 }
 
-
-setInterval(updateCountdown,1000);
-
-updateCountdown();
-
-
-/* ==================================================
-   SETTINGS
-================================================== */
 
 function saveSettings(){
 
-  if(!account){
+  const member=getCurrentMember();
 
-    alert("Account পাওয়া যায়নি।");
+  if(!member) return;
+
+
+  const name=
+    document.getElementById(
+      "settingsName"
+    ).value.trim();
+
+  const file=
+    document.getElementById(
+      "photoInput"
+    ).files[0];
+
+  const error=
+    document.getElementById(
+      "settingsError"
+    );
+
+  error.textContent="";
+
+
+  if(!name){
+
+    error.textContent=
+      "Account name cannot be empty.";
+
     return;
-
   }
 
 
-  const newName =
-    document.getElementById("newNameInput")
-      .value.trim();
+  const members=getMembers();
+
+  const index=
+    members.findIndex(
+      item=>item.memberId===member.memberId
+    );
 
 
-  const picture =
-    document.getElementById("pictureInput")
-      .files[0];
+  if(index===-1) return;
 
 
-  if(newName){
-
-    account.name = newName;
-
-  }
+  members[index].name=name;
 
 
-  if(picture){
+  if(file){
 
-    const reader =
-      new FileReader();
+    const reader=new FileReader();
 
 
-    reader.onload = function(event){
+    reader.onload=function(event){
 
-      account.picture =
+      members[index].photo=
         event.target.result;
 
+      saveMembers(members);
 
-      finishSettings();
+      loadProfile(members[index]);
+
+      showPage("profile");
 
     };
 
 
-    reader.readAsDataURL(picture);
+    reader.readAsDataURL(file);
+
 
   }else{
 
-    finishSettings();
+    saveMembers(members);
+
+    loadProfile(members[index]);
+
+    showPage("profile");
 
   }
 
 }
 
 
-function finishSettings(){
+/* =====================================================
+   PROFILE
+===================================================== */
 
-  localStorage.setItem(
-    "INNOVA_ACCOUNT",
-    JSON.stringify(account)
-  );
+function showProfile(){
 
+  const member=getCurrentMember();
 
-  document.getElementById("newNameInput")
-    .value = "";
+  if(!member){
 
+    showPage("welcome");
 
-  document.getElementById("pictureInput")
-    .value = "";
+    return;
+  }
 
+  loadProfile(member);
 
-  loadProfile();
-
-
-  alert(
-    "Profile updated successfully."
-  );
-
-
-  openPage("profilePage");
+  showPage("profile");
 
 }
 
 
-/* ==================================================
+/* =====================================================
+   SUCCESS → LOGIN
+===================================================== */
+
+function openLoginAfterActivation(){
+
+  const member=getCurrentMember();
+
+
+  if(member){
+
+    document.getElementById(
+      "loginMobile"
+    ).value=member.mobile;
+
+  }
+
+
+  document.getElementById(
+    "loginPassword"
+  ).value="";
+
+
+  showPage("login");
+
+}
+
+
+/* =====================================================
    LOGOUT
-================================================== */
+===================================================== */
 
 function logout(){
 
-  openPage("homePage");
+  localStorage.removeItem(CURRENT_KEY);
 
-  alert(
-    "You have been logged out."
-  );
+  document.getElementById(
+    "loginMobile"
+  ).value="";
+
+  document.getElementById(
+    "loginPassword"
+  ).value="";
+
+
+  showPage("welcome");
+
+}
+
+
+/* =====================================================
+   COUNTDOWN
+   10 OCTOBER 2026 — Bangladesh time
+===================================================== */
+
+function updateCountdown(){
+
+  const target=
+    new Date(
+      "2026-10-10T00:00:00+06:00"
+    ).getTime();
+
+
+  const now=
+    Date.now();
+
+
+  let difference=
+    target-now;
+
+
+  if(difference<0){
+    difference=0;
+  }
+
+
+  const days=
+    Math.floor(
+      difference/
+      (1000*60*60*24)
+    );
+
+
+  const hours=
+    Math.floor(
+      (difference%
+      (1000*60*60*24))/
+      (1000*60*60)
+    );
+
+
+  const minutes=
+    Math.floor(
+      (difference%
+      (1000*60*60))/
+      (1000*60)
+    );
+
+
+  const seconds=
+    Math.floor(
+      (difference%
+      (1000*60))/
+      1000
+    );
+
+
+  document.getElementById(
+    "days"
+  ).textContent=
+    String(days).padStart(2,"0");
+
+
+  document.getElementById(
+    "hours"
+  ).textContent=
+    String(hours).padStart(2,"0");
+
+
+  document.getElementById(
+    "minutes"
+  ).textContent=
+    String(minutes).padStart(2,"0");
+
+
+  document.getElementById(
+    "seconds"
+  ).textContent=
+    String(seconds).padStart(2,"0");
 
 }
 
 
-/* ==================================================
-   START
-================================================== */
+updateCountdown();
 
-if(account && account.active){
+setInterval(
+  updateCountdown,
+  1000
+);
 
-  loadProfile();
 
-}
+/* =====================================================
+   STARTUP
+===================================================== */
 
-openPage("homePage");
+window.addEventListener(
+  "load",
+  function(){
+
+    const member=getCurrentMember();
+
+    if(member && member.active){
+
+      loadProfile(member);
+
+    }
+
+  }
+);
 
 </script>
 
 </body>
 </html>
-```
